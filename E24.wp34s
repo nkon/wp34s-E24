@@ -1,0 +1,138 @@
+/*
+Input: X reg
+Output: X reg <- E6(Input)
+E6:  1.0 1.5 2.2 3.3 4.7 6.8
+E24: 1.0 1.1 1.2 1.3 1.5 1.6  1.8 2.0 2.2 2.4 2.7 3.0
+     3.3 3.6 3.9 4.3 4.7 5.1  5.6 6.2 6.8 7.5 8.2 9.1
+ */
+// TODO
+// ローカル変数を使ってスタックの消費を減らす。
+// テーブル、間接アドレッシング化。
+// E6〜E24 の統合、E96の追加
+	LBL'E24'
+	SSIZE8
+	EXPT
+	RCL L
+	MANT
+// X = MANT(orig X), Y=EXPT(orig X)
+	# 010	// begin
+	# 011
+	XEQ 00
+	RTN	// end
+	# 011	// begin
+	# 012
+	XEQ 00
+	RTN	// end
+	# 012	// begin
+	# 013
+	XEQ 00
+	RTN	// end
+	# 013	// begin
+	# 015
+	XEQ 00
+	RTN	// end
+	# 015	// begin
+	# 016
+	XEQ 00
+	RTN	// end
+	# 016	// begin
+	# 018
+	XEQ 00
+	RTN	// end
+	# 018	// begin
+	# 020
+	XEQ 00
+	RTN	// end
+	# 020	// begin
+	# 022
+	XEQ 00
+	RTN	// end
+	# 020	// begin
+	# 024
+	XEQ 00
+	RTN	// end
+	# 024	// begin
+	# 027
+	XEQ 00
+	RTN	// end
+	# 027	// begin
+	# 030
+	XEQ 00
+	RTN	// end
+	# 030	// begin
+	# 033
+	XEQ 00
+	RTN	// end
+	# 033	// begin
+	# 036
+	XEQ 00
+	RTN	// end
+	# 036	// begin
+	# 039
+	XEQ 00
+	RTN	// end
+	# 039	// begin
+	# 043
+	XEQ 00
+	RTN	// end
+	# 043	// begin
+	# 047
+	XEQ 00
+	RTN	// end
+	# 047	// begin
+	# 051
+	XEQ 00
+	RTN	// end
+	# 051	// begin
+	# 056
+	XEQ 00
+	RTN	// end
+	# 056	// begin
+	# 062
+	XEQ 00
+	RTN	// end
+	# 062	// begin
+	# 068
+	XEQ 00
+	RTN	// end
+	# 068	// begin
+	# 075
+	XEQ 00
+	RTN	// end
+	# 075	// begin
+	# 082
+	XEQ 00
+	RTN	// end
+	# 082	// begin
+	# 091
+	XEQ 00
+	RTN	// end
+	# 091	// begin
+	# 100
+	XEQ 00
+	RTN	// end
+	# 100	// begin
+	# 110
+	XEQ 00
+	RTN	// end
+	LBL 00	// ROUND
+	LocR 001
+	x[<->] Y
+	STO .00
+	+
+	# 020
+	/
+	x<=? Y
+	SKIP 008
+	DROP	// Drop threashold
+	DROP	// Drop mantessa
+	1
+	-
+	10[^x]
+	RCL .00	// Recoll rounded mantessa
+	[times]
+	RTN	// Good Return
+	DROP	// SKIP 008 come here.Drop Threashold
+	RTN+1	// Next parameter
+	END	// Program Separator
+
